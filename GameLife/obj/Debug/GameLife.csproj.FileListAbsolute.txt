@@ -1,0 +1,10 @@
+C:\Users\Даня\Desktop\игра\GameLife\bin\Debug\GameLife.exe.config
+C:\Users\Даня\Desktop\игра\GameLife\bin\Debug\GameLife.exe
+C:\Users\Даня\Desktop\игра\GameLife\bin\Debug\GameLife.pdb
+C:\Users\Даня\Desktop\игра\GameLife\obj\Debug\GameLife.csproj.AssemblyReference.cache
+C:\Users\Даня\Desktop\игра\GameLife\obj\Debug\GameLife.Properties.Resources.resources
+C:\Users\Даня\Desktop\игра\GameLife\obj\Debug\GameLife.csproj.GenerateResource.cache
+C:\Users\Даня\Desktop\игра\GameLife\obj\Debug\GameLife.csproj.CoreCompileInputs.cache
+C:\Users\Даня\Desktop\игра\GameLife\obj\Debug\GameLife.exe
+C:\Users\Даня\Desktop\игра\GameLife\obj\Debug\GameLife.pdb
+C:\Users\Даня\Desktop\игра\GameLife\obj\Debug\GameLife.Form1.resources
