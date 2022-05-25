@@ -69,9 +69,53 @@ namespace GameLife
             }
         }
 
+        private void button_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Игра «Жизнь» происходит на клеточном поле, которое, традиционно, называется «вселенная»." + "\n"+
+                "Каждая клетка может быть живой или мёртвой." +"\n"+
+                "Поколения сменяются синхронно по простым правилам:" +"\n"+
+                "1) в пустой (мёртвой) клетке, рядом с которой ровно три живые клетки, зарождается жизнь;" + "\n" +
+                "2) если у живой клетки есть две или три живые соседки, то эта клетка продолжает жить; " + "\n" +
+                "3) в противном случае (если соседей меньше двух или больше трёх) клетка умирает («от одиночества» или «от перенаселённости»).");
+        }
+        public int count = 1;
+        public Label label = new Label();
+
+        public Timer timer = new Timer();
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            count++;
+            label.Text = count.ToString();
+        }
+
         void BuildMenu()
         {
             var menu = new MenuStrip();
+
+            var label2 = new Label
+            {
+                Text = "Поколение",
+                Location = new Point(950, 450),
+                Font = new Font("",24,FontStyle.Bold),
+                Size = new Size(200,150)
+                
+            };
+
+            label.Text = "0";
+            label.Size = new Size(200, 150);
+            label.Font = new Font("", 24, FontStyle.Bold);
+            label.Location = new Point(1025, 500);
+
+            Controls.Add(label);
+            Controls.Add(label2);
+            timer = new Timer
+            {
+                Interval = 100
+            };
+
+            timer.Tick += timer_Tick;
+
 
             var restart = new ToolStripMenuItem("Начать заново");
             restart.Click += new EventHandler(Restart);
@@ -79,8 +123,26 @@ namespace GameLife
             var play = new ToolStripMenuItem("Начать");
             play.Click += new EventHandler(Play);
 
+            var stop = new ToolStripMenuItem("Стоп");
+            stop.Click += new EventHandler(Stop);
+
+            var resume = new ToolStripMenuItem("Продолжить");
+            resume.Click += new EventHandler(Resume);
+
+            var button = new Button();
+            Controls.Add(button);
+
+            button.Name = "Правила";
+            button.Text = "Правила";
+            button.Location = new Point(950, 100);
+            button.Size = new Size(200, 100);
+            button.Font = new Font("", 18, FontStyle.Bold);
+            button.Click += button_Click;
+
             menu.Items.Add(play);
             menu.Items.Add(restart);
+            menu.Items.Add(stop);
+            menu.Items.Add(resume);
 
             this.WindowState = FormWindowState.Maximized;
 
@@ -88,10 +150,25 @@ namespace GameLife
             this.Controls.Add(menu);
         }
 
+        private void Resume(object sender, EventArgs e)
+        {
+            mainTimer.Start();
+            timer.Start();
+        }
+
+        private void Stop(object sender, EventArgs e)
+        {
+            mainTimer.Stop();
+            timer.Stop();
+        }
+
         private void Restart(object sender, EventArgs e)
         {
             mainTimer.Stop();
             ClearGame();
+            count = 0;
+            label.Text = "0";
+            timer.Stop();
         }
 
         private void Play(object sender, EventArgs e)
@@ -100,6 +177,7 @@ namespace GameLife
             {
                 isPlaying = true;
                 mainTimer.Start();
+                timer.Start();
             }
         }
 
@@ -107,6 +185,7 @@ namespace GameLife
         {
             CalculateNextState();
             DisplayMap();
+            
             if (CheckGenerationDead())
             {
                 mainTimer.Stop();
