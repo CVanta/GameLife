@@ -189,7 +189,9 @@ namespace GameLife
             if (CheckGenerationDead())
             {
                 mainTimer.Stop();
-                MessageBox.Show("Все клетки погибли");
+                timer.Stop();
+                MessageBox.Show("Все клетки погибли"+"\n"+"\n"+"Последнее поколение:" + "\n" +
+                    count.ToString());
             }
         }
 
